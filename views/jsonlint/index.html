@@ -1,0 +1,84 @@
+{% extends '../layout/layout.html' %}
+
+{% block script %}
+{{ super() }}
+<script>
+  var app = app || {};
+</script>
+<script src="/script/jsonlint/index.js"></script>
+{% endblock %}
+
+{% block style %}
+{{ super() }}
+<link rel="stylesheet" href="/style/jsonlint/index.css">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4 class="title-text text-muted">JsonLint</h4>
+    </div>
+    <div class="col-md-4">
+      <div class="dropdown" style="float:right;">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Example
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {% for example in page.examples %}
+          <a class="dropdown-item" href="/jsonlint/{{ example.name }}" target="_blank">{{ example.name }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-10">
+      <nav>
+        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-input-tab" data-toggle="tab" href="#nav-input" role="tab" aria-controls="nav-input" aria-selected="true">Input</a>
+          <a class="nav-item nav-link" id="nav-output-tab" data-toggle="tab" href="#nav-output" role="tab" aria-controls="nav-output" aria-selected="false">Ouput</a>
+          <a class="nav-item nav-link" id="nav-error-tab" data-toggle="tab" href="#nav-error" role="tab" aria-controls="nav-error" aria-selected="false">Error</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-input" role="tabpanel" aria-labelledby="nav-input-tab">
+          <form>
+            <div class="form-group">
+              {% if page.record %}
+              <textarea class="form-control" id="inputTextarea" rows="15">{{ page.record.input|safe }}</textarea>
+              {% else %}
+              <textarea class="form-control" id="inputTextarea" rows="15"></textarea>
+              {% endif %}
+            </div>
+          </form>
+        </div>
+        <div class="tab-pane fade" id="nav-output" role="tabpanel" aria-labelledby="nav-output-tab">
+          <form>
+            <div class="form-group">
+              {% if page.record %}
+              <textarea class="form-control" id="outputTextarea" rows="15">{{ page.record.output|safe }}</textarea>
+              {% else %}
+              <textarea class="form-control" id="outputTextarea" rows="15"></textarea>
+              {% endif %}
+            </div>
+          </form>
+        </div>
+        <div class="tab-pane fade" id="nav-error" role="tabpanel" aria-labelledby="nav-error-tab">
+          <form>
+            <div class="form-group">
+              <textarea class="form-control" id="errorTextarea" rows="15"></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <button class="btn btn-primary btn-convert">Process</button>
+    </div>
+  </div>
+  
+</div>
+{% endblock %}

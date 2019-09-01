@@ -1,0 +1,29 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: JsonLint API
+  description: validate and convert Json input
+
+schemes:
+  - http
+host: leapbase.com
+basePath: /jsonlint
+
+paths:
+  /convert:
+    post:
+      summary: JsonLint Convert
+      description: Convert text into Json object
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: input
+          description: Json text input
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: successful operation

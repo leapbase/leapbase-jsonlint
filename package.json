@@ -1,0 +1,9 @@
+{
+  "name": "jsonlint",
+  "dependencies": {
+    "jsonlint": "^1.6.3"
+  },
+  "scripts": {
+    "test_jsonlint": "find -L ./test -name 'jsonlint_test.js' | xargs mocha -R spec"
+  }
+}
